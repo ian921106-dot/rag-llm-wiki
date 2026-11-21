@@ -1,0 +1,16 @@
+{
+ "target": "slides",
+ "slides": 16,
+ "errors": [
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-rerank",
+   "detail": "「80」不在 ['concepts/reranking-topk', 'sources/S2', 'sources/S3']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-rerank",
+   "detail": "「Google」不在 ['concepts/reranking-topk', 'sources/S2', 'sources/S3']"
+  }
+ ]
+}

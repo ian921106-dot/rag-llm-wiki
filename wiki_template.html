@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAG LLM Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f3ec;--ink:#1d1b18;--muted:#6b655b;--line:#d9d2c3;--accent:#d1495b;--blue:#2d6a8f;--side:#1d1b18}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC",system-ui,sans-serif;color:var(--ink);background:var(--bg);display:flex;min-height:100vh}
+aside{width:290px;flex:none;background:var(--side);color:#e6dfd1;padding:24px 16px;position:sticky;top:0;height:100vh;overflow:auto}
+aside .brand{font-weight:900;font-size:22px;margin:0 8px 4px}
+aside .sub{font-size:13px;color:#9b9387;margin:0 8px 18px;line-height:1.5}
+aside input{width:100%;padding:8px 10px;border-radius:8px;border:1px solid #4a463f;background:#2b2925;color:#f6f3ec;font:inherit;font-size:14px;margin-bottom:10px}
+.ng{font:500 11px "JetBrains Mono",monospace;letter-spacing:.1em;color:#f08a98;margin:18px 8px 6px;text-transform:uppercase}
+.nl{display:block;color:#d6cfc1;text-decoration:none;font-size:14px;padding:6px 8px;border-radius:6px;line-height:1.4}
+.nl:hover{background:#2f2c27}.nl.on{background:#d1495b;color:#fff}
+.nl.hide{display:none}
+main{flex:1;padding:48px 64px 80px;max-width:980px}
+.crumb{font:500 12px "JetBrains Mono",monospace;color:var(--accent);letter-spacing:.08em;margin-bottom:6px}
+main h1{font-size:36px;font-weight:900;margin:.2em 0 .6em;line-height:1.25}
+main h2{font-size:24px;margin:1.6em 0 .5em;border-bottom:1px solid var(--line);padding-bottom:6px}
+main h3{font-size:19px;margin:1.3em 0 .4em}
+main p,main li{font-size:17px;line-height:1.8}
+main table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15.5px;background:#fffdf8}
+main th,main td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+main th{background:#efe8da}
+main pre{background:#1d1b18;color:#efe8da;padding:16px 18px;border-radius:10px;overflow:auto;font:13px/1.6 "JetBrains Mono",monospace}
+main code{font-family:"JetBrains Mono",monospace;font-size:.9em;background:#efe8da;padding:1px 5px;border-radius:4px}
+main pre code{background:none;padding:0}
+a.wl{color:var(--blue);text-decoration:none;border-bottom:1.5px solid #9cc3db;font-weight:500}
+a.wl.broken{color:var(--accent);border-color:var(--accent)}
+a.cite{font:500 12px "JetBrains Mono",monospace;background:#e6f0f6;color:var(--blue);padding:1px 6px;border-radius:99px;text-decoration:none;vertical-align:1px}
+.backlinks{margin-top:48px;padding:16px 18px;background:#fffdf8;border:1px solid var(--line);border-radius:10px;font-size:14px;color:var(--muted)}
+.backlinks a{margin-right:12px}
+@media(max-width:800px){body{display:block}aside{position:static;width:auto;height:auto}main{padding:28px 20px}}
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand">RAG LLM Wiki</div>
+  <div class="sub">檢索增強生成（Retrieval-Augmented Generation）知識庫 · 6 篇來源 · 由 LLM 依 Karpathy 的 LLM Wiki 模式維護</div>
+  <input id="q" placeholder="搜尋頁面…">
+  <nav id="nav"><!--NAV--></nav>
+</aside>
+<main id="main"></main>
+<script>
+var PAGES=/*PAGES*/;
+function render(){
+  var s=location.hash.slice(1); if(!PAGES[s]) s='index';
+  var p=PAGES[s], back=[];
+  for(var k in PAGES){ if(k!==s && PAGES[k].h.indexOf('href="#'+s+'"')>-1) back.push('<a class="wl" href="#'+k+'">'+PAGES[k].t+'</a>'); }
+  document.getElementById('main').innerHTML='<div class="crumb">'+p.g+' / '+p.k+'</div>'+p.h+
+    (back.length?'<div class="backlinks"><b>連到這頁的頁面（backlinks）：</b><br>'+back.join('')+'</div>':'');
+  [].forEach.call(document.querySelectorAll('.nl'),function(a){a.classList.toggle('on',a.dataset.s===s)});
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',render); render();
+document.getElementById('q').addEventListener('input',function(){
+  var q=this.value.trim().toLowerCase();
+  [].forEach.call(document.querySelectorAll('.nl'),function(a){
+    var p=PAGES[a.dataset.s]; var hit=!q||(p.t+p.h).toLowerCase().indexOf(q)>-1; a.classList.toggle('hide',!hit);});
+});
+</script>
+</body>
+</html>

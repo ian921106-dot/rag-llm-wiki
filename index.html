@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Wiki 作業：RAG 教學 HTML 簡報</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#f6f3ec;color:#1d1b18;font-family:"Noto Sans TC",system-ui,sans-serif}
+main{max-width:960px;margin:0 auto;padding:48px 28px 80px}h1{font-size:34px;font-weight:900;line-height:1.3}
+h2{font-size:24px;border-bottom:2px solid #d1495b;padding-bottom:6px;margin-top:2.2em}p,li{font-size:17px;line-height:1.8}
+table{border-collapse:collapse;width:100%;background:#fffdf8;font-size:15px}th,td{border:1px solid #d9d2c3;padding:8px 10px;text-align:left;vertical-align:top}th{background:#efe8da}
+a{color:#2d6a8f;font-weight:700}code{background:#efe8da;padding:1px 5px;border-radius:4px}
+.mermaid{background:#fffdf8;border:1px solid #d9d2c3;border-radius:12px;padding:16px;margin:16px 0;text-align:center}</style></head>
+<body><main><h1>LLM Wiki 作業：用 RAG LLM Wiki 做教學 HTML 簡報</h1>
+<p><strong>學校 學號 系級 姓名</strong>（請自行填入）</p>
+<h2>1. LLM Wiki 主題與簡短介紹</h2>
+<p><strong>主題：RAG（Retrieval-Augmented Generation，檢索增強生成）</strong></p>
+<p>RAG 是讓大型語言模型「先查資料、再回答」的技術：回答前先從外部知識庫找出相關片段，和問題一起交給模型生成答案，用來減少幻覺、讓知識可以更新、答案可以追溯出處。選這個主題是因為它和 LLM Wiki 本身的概念很接近（兩者都在處理「LLM 怎麼用外部知識」），適合做成給初學者的教學。</p>
+<p>Wiki 依照 Karpathy 的 LLM Wiki 模式建立，分三層：</p>
+<ul>
+<li><strong>raw/</strong>：6 篇來源的原始筆記（ingest 後不再修改）</li>
+<li><strong>wiki/</strong>：13 個概念頁 + 6 個來源摘要頁，互相用 <code>[[連結]]</code> 串起來，每個事實句標 <code>[S#]</code> 出處</li>
+<li><strong>SCHEMA.md</strong>：維護規則；<strong>log.md</strong>：時間順序的維護紀錄；<strong>tools/check.py</strong>：lint 檢查器</li>
+</ul>
+<p>共 ingest <strong>6 篇</strong>資料：</p>
+<table>
+<thead>
+<tr>
+<th>代號</th>
+<th>來源</th>
+<th>類型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>Lewis et al. (2020) Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, NeurIPS</td>
+<td>原始論文</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>Gao et al. (2023/2024) Retrieval-Augmented Generation for Large Language Models: A Survey</td>
+<td>綜述論文</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Anthropic (2024) Introducing Contextual Retrieval</td>
+<td>官方技術文章</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Liu et al. (2024) Lost in the Middle, TACL</td>
+<td>實證研究（反面發現）</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Es et al. (2023) Ragas: Automated Evaluation of RAG</td>
+<td>評估方法</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>Karpathy (2026) LLM Wiki, GitHub gist</td>
+<td>方法論</td>
+</tr>
+</tbody>
+</table>
+<h2>2. LLM Wiki 連結</h2>
+<ul>
+<li><a href="wiki.html">RAG LLM Wiki（網頁版）</a>：左側目錄、頁面互連、反向連結、搜尋</li>
+<li><a href="rag-wiki/">Wiki 原始 markdown 檔</a>：raw / wiki / SCHEMA.md / log.md</li>
+</ul>
+<h2>3. 教學 HTML 簡報連結</h2>
+<p><a href="slides.html">RAG 是什麼？讓 AI 先查資料再回答</a>：16 頁，← → 或空白鍵換頁。每一頁的 HTML 都標了 <code>data-wiki</code>（這頁用到哪些 Wiki 頁），頁尾寫出來源，最後有小測驗與參考資料。</p>
+<h2>4. Loop / Graph 設計</h2>
+<div class="mermaid">
+flowchart TD
+    A[討論：主題、讀者、來源標準] --> B[取得資料：搜尋與擷取]
+    B --> C[Ingest 一篇來源：寫 raw 筆記、更新概念頁、index、log]
+    C -->|還有下一篇| C
+    C --> D{Wiki Lint}
+    D -->|有錯：Wiki 內容問題| E[修正 Wiki 頁]
+    E --> D
+    D -->|有錯：檢查器誤報| F[修正檢查器]
+    F --> D
+    D -->|通過| G[Query：只讀 index 與 Wiki 頁整理重點]
+    G --> H[產生簡報：每頁標 data-wiki 與出處]
+    H --> I{簡報出處檢查}
+    I -->|簡報自己編的內容| H
+    I -->|Wiki 缺資料| C
+    I -->|檢查器誤報| F
+    I -->|通過| J{截圖檢查版面}
+    J -->|版面壞掉| K[修 CSS]
+    K --> J
+    J -->|通過| L[發佈 Wiki 與簡報]
+</div>
+
+<p><strong>流程</strong>：討論 → 取得資料 → Ingest（逐篇）→ Wiki Lint → 查詢 Wiki → 產生簡報 → 出處檢查 → 版面檢查 → 發佈</p>
+<p><strong>哪些步驟會重複執行？</strong></p>
+<ul>
+<li><strong>Ingest</strong>：一次一篇，跑 6 次；每次都要更新受影響的概念頁、index 和 log（一篇來源常常會更新 3–6 頁）。</li>
+<li><strong>Lint ↔ 修正</strong>：Wiki 只要被改過就重跑 lint，直到 0 個錯誤（實際跑了 6 次）。</li>
+<li><strong>產生簡報 ↔ 出處檢查</strong>：簡報有改就重跑（實際跑了 4 次，外加 1 次故意塞錯的變異測試）。</li>
+<li><strong>截圖 ↔ 修 CSS</strong>：版面改了就重新截圖。</li>
+</ul>
+<p><strong>哪些地方需要檢查或重新生成？</strong></p>
+<ul>
+<li><strong>Wiki Lint（<code>check.py wiki</code>）</strong>：W1 壞連結、W2 孤兒頁、W3 index 漏列、W4 沒有出處、W5 Wiki 裡的數字在 raw 筆記找不到、W6 內文引用和 frontmatter 不一致、W7 來源頁缺年份或網址。</li>
+<li><strong>簡報出處檢查（<code>check.py slides</code>）</strong>：P1 每頁要標 data-wiki 且頁面存在、P2 簡報上的每個數字都要出現在引用的 Wiki 頁、P3 英文術語／人名都要出現在引用的 Wiki 頁、P4 每頁要有出處標示、P5 index 列出的每個概念都要出現在簡報。</li>
+<li><strong>重新生成的分流</strong>：檢查失敗時，依錯誤類型回到不同節點——簡報自己編的內容回「產生簡報」，Wiki 缺資料回「Ingest／修 Wiki」，檢查器誤報回「修檢查器」。</li>
+</ul>
+<p><strong>為什麼這樣設計？</strong></p>
+<ul>
+<li><strong>Wiki 是唯一的知識來源</strong>：簡報只能從 Wiki 拿內容，所以檢查可以機械化——「簡報上的數字／術語是否在它標註的 Wiki 頁裡？」不需要人工逐字對。</li>
+<li><strong>數字最容易出錯</strong>：幻覺最常出現在具體數字（百分比、年份、篇數），所以 W5、P2 專門抓數字。</li>
+<li><strong>一次 ingest 一篇</strong>：比較容易追蹤每頁內容從哪來，也符合 Karpathy 建議的「一次一篇、保持參與」。</li>
+<li><strong>檢查器本身也會錯</strong>：所以流程裡有「修正檢查器」節點，並用變異測試證明它真的抓得到錯。</li>
+</ul>
+<h2>5. 一次實際執行的結果與檢查紀錄</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>檢查</th>
+<th>結果</th>
+<th>原因</th>
+<th>處理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Wiki Lint #1</td>
+<td>1 錯</td>
+<td>「## 3. Modular RAG」的標題編號被當成數字（檢查器誤報）</td>
+<td>修檢查器，忽略編號標題</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Wiki Lint #2</td>
+<td>0 錯</td>
+<td>—</td>
+<td>進入產生簡報</td>
+</tr>
+<tr>
+<td>3</td>
+<td>簡報檢查 #1</td>
+<td><strong>49 錯</strong></td>
+<td>14 個：章節編號 01–14 被當成數字（誤報）；1 個：跨元素文字黏在一起（誤報）；33 個：作者、年份、論文標題（Lewis、Gao、NeurIPS、2020…）不在該頁標註的概念頁；<strong>1 個真錯誤：封面寫「15 分鐘看懂」，Wiki 裡沒有這個數字，是生成時自己加的</strong></td>
+<td>刪掉「15 分鐘」；檢查器 v2：忽略章節編號、元素間加分隔、投影片引用 [S#] 時自動把來源頁納入範圍；新增 W7 規則</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Wiki Lint #3</td>
+<td>0 錯</td>
+<td>W7 被檔名 <code>raw/S2-gao-2023…</code> 騙過（檢查器漏報）</td>
+<td>修檢查器，排除 raw 檔名</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Wiki Lint #4</td>
+<td>1 錯</td>
+<td>W7：S2 來源頁沒寫出版年份</td>
+<td>補上「v1 2023-12，v5 2024-03」</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Wiki Lint #5</td>
+<td>1 錯</td>
+<td>W5：補年份時寫成「3 月」，和 raw 筆記的「2024-03」對不上</td>
+<td>改成和 raw 一致的寫法</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Wiki Lint #6／簡報檢查 #2–#4</td>
+<td>0 錯</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>8</td>
+<td>變異測試</td>
+<td>2 錯（預期中）</td>
+<td>故意插入「準確率可提升 80%（Google 研究）」</td>
+<td>檢查器正確抓到「80」和「Google」都不在 Wiki → 證明檢查有效</td>
+</tr>
+<tr>
+<td>9</td>
+<td>截圖檢查</td>
+<td>2 個版面問題</td>
+<td>封面深色背景被 CSS 權重蓋掉，標題變成白字白底；導覽按鈕擋住頁尾出處</td>
+<td>修 CSS，重新截圖確認</td>
+</tr>
+</tbody>
+</table>
+<p>每次檢查的原始輸出在 <a href="runs/">runs/</a> 資料夾。</p>
+<h2>6. 反思</h2>
+<p><strong>哪一個節點最常出錯？</strong></p>
+<p><strong>「產生簡報」這個節點</strong>。第一次檢查的 49 個錯誤中，有 34 個是生成時把 Wiki 沒有、或不在該頁引用範圍內的東西寫上投影片：33 個是作者、年份、論文標題這類引用資訊（模型「知道」這些，就直接寫上去，但沒有對應到 Wiki 頁），1 個是完全自己編出來的「15 分鐘看懂」。這正是 RAG 想解決的問題——模型會不自覺地用自己的參數記憶補內容。第二常出錯的是<strong>檢查器本身</strong>（4 次誤報或漏報），代表檢查規則也需要被檢查。</p>
+<p><strong>發現問題後，把檢查往前移到哪一個步驟？</strong></p>
+<p>從「簡報出處檢查」往前移到 <strong>Ingest 之後的 Wiki Lint</strong>。新增 W7 規則：每個來源摘要頁在 ingest 時就必須寫出版年份和網址。這樣簡報要引用「Gao et al. (2023/2024)」時，Wiki 裡一定已經有這筆資料；缺的話在 Wiki 階段就會被擋下（實際上就抓到 S2 少了年份），不用等到做完簡報才發現。</p>
+<p><strong>有沒有因此修改 workflow／graph？為什麼？</strong></p>
+<p>有，改了三處：</p>
+<ol>
+<li><strong>加了 W7 規則</strong>（檢查往前移）：理由如上，越早發現，回頭修的範圍越小。</li>
+<li><strong>加了「修正檢查器」節點</strong>：原本流程假設檢查器永遠正確，但實際跑出 15 個誤報和 1 個漏報。如果沒有這個節點，就只能硬改簡報去配合錯的規則。</li>
+<li><strong>檢查失敗時依錯誤類型分流</strong>：原本失敗一律「重新生成簡報」，但 33 個錯誤其實是檢查範圍設錯、S2 年份問題是 Wiki 本身缺資料，重新生成簡報解決不了。所以改成依錯誤來源回到不同節點（簡報／Wiki／檢查器）。</li>
+</ol>
+<p>另外加了<strong>變異測試</strong>：故意塞一個假數字，確認檢查器真的抓得到；檢查全部通過時，才能分辨是「真的沒錯」還是「檢查器失靈」。</p></main>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,theme:"neutral"});</script>
+</body></html>

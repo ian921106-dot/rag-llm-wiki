@@ -1,0 +1,251 @@
+{
+ "target": "slides",
+ "slides": 16,
+ "errors": [
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-cover",
+   "detail": "「15」不在 ['index', 'concepts/what-is-rag']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-problem",
+   "detail": "「01」不在 ['concepts/hallucination-and-limits']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-problem",
+   "detail": "「2020」不在 ['concepts/hallucination-and-limits']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-problem",
+   "detail": "「Gao」不在 ['concepts/hallucination-and-limits']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-problem",
+   "detail": "「Lewis」不在 ['concepts/hallucination-and-limits']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-oneline",
+   "detail": "「02」不在 ['concepts/what-is-rag']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-memory",
+   "detail": "「03」不在 ['concepts/parametric-vs-nonparametric']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-memory",
+   "detail": "「2020」不在 ['concepts/parametric-vs-nonparametric']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-memory",
+   "detail": "「Lewis」不在 ['concepts/parametric-vs-nonparametric']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-memory",
+   "detail": "「NeurIPS」不在 ['concepts/parametric-vs-nonparametric']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-pipeline",
+   "detail": "「04」不在 ['concepts/what-is-rag', 'concepts/rag-paradigms']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-pipeline",
+   "detail": "「Gao」不在 ['concepts/what-is-rag', 'concepts/rag-paradigms']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-chunk",
+   "detail": "「05」不在 ['concepts/indexing-chunking', 'concepts/embeddings-vector-search']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-hybrid",
+   "detail": "「06」不在 ['concepts/bm25-hybrid-search']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-hybrid",
+   "detail": "「Anthropic」不在 ['concepts/bm25-hybrid-search']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-hybrid",
+   "detail": "「Gao」不在 ['concepts/bm25-hybrid-search']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-rerank",
+   "detail": "「07」不在 ['concepts/reranking-topk']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-rerank",
+   "detail": "「Gao」不在 ['concepts/reranking-topk']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-contextual",
+   "detail": "「08」不在 ['concepts/contextual-retrieval']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-contextual",
+   "detail": "「Introducing Contextual Retrieval」不在 ['concepts/contextual-retrieval']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-lost",
+   "detail": "「09」不在 ['concepts/lost-in-the-middle']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-lost",
+   "detail": "「2024」不在 ['concepts/lost-in-the-middle']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-lost",
+   "detail": "「Liu」不在 ['concepts/lost-in-the-middle']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-lost",
+   "detail": "「TACL」不在 ['concepts/lost-in-the-middle']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-paradigms",
+   "detail": "「10」不在 ['concepts/rag-paradigms']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-paradigms",
+   "detail": "「Gao」不在 ['concepts/rag-paradigms']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-vs",
+   "detail": "「11」不在 ['concepts/rag-vs-finetuning-vs-long-context']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-eval",
+   "detail": "「12」不在 ['concepts/rag-evaluation']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-eval",
+   "detail": "「Gao」不在 ['concepts/rag-evaluation']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-wiki",
+   "detail": "「13」不在 ['concepts/rag-vs-llm-wiki']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-wiki",
+   "detail": "「Karpathy」不在 ['concepts/rag-vs-llm-wiki']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-wiki",
+   "detail": "「RAG LLM Wiki」不在 ['concepts/rag-vs-llm-wiki']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-quiz",
+   "detail": "「14」不在 ['concepts/what-is-rag', 'concepts/indexing-chunking', 'concepts/lost-in-the-middle', 'concepts/rag-evaluation']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-refs",
+   "detail": "「2005.11401」不在 ['index']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-refs",
+   "detail": "「2023」不在 ['index']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-refs",
+   "detail": "「2024」不在 ['index']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-refs",
+   "detail": "「2026」不在 ['index']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-refs",
+   "detail": "「2307.03172」不在 ['index']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-refs",
+   "detail": "「2309.15217」不在 ['index']"
+  },
+  {
+   "rule": "P2 數字不在 Wiki",
+   "page": "s-refs",
+   "detail": "「2312.10997」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「Automated Evaluation」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「GitHub」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「How Language Models Use Long Contexts」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「Introducing Contextual Retrieval」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「Knowledge-Intensive NLP Tasks」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「Large Language Models」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「RAG LLM Wiki Wiki」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「Retrieval Augmented Generation」不在 ['index']"
+  },
+  {
+   "rule": "P3 術語不在 Wiki",
+   "page": "s-refs",
+   "detail": "「Survey」不在 ['index']"
+  }
+ ]
+}

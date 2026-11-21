@@ -1,0 +1,12 @@
+{
+ "target": "wiki",
+ "pages": 20,
+ "sources": 6,
+ "errors": [
+  {
+   "rule": "W5 數字無出處",
+   "page": "sources/S2",
+   "detail": "數字「3」在 ['S2'] 的 raw 筆記裡找不到"
+  }
+ ]
+}
